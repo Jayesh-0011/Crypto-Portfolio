@@ -1,10 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Content from "./ItemCont/Content";
 import { CntContext } from "../../../hooks/CntContext.js";
+import { ReturnContext } from "../../../hooks/ReturnContext.js";
 
 const Itemhead = () => {
   const { cnt } = useContext(CntContext);
-
+  const {returns, setReturns}=useContext(ReturnContext)
+  const returncal=(cnt)=> {
+    let total=0
+    cnt.forEach((coin)=> {
+        coin.buyprice.forEach((buy)=>{
+          total+=(-buy+coin.price)
+        })
+    })
+    setReturns(total)
+  }
+  useEffect(()=> {
+    returncal(cnt)
+  }, [cnt])
   return (
     <div className="mt-8 mx-5 text-lg">
       <table className="w-full border-collapse">

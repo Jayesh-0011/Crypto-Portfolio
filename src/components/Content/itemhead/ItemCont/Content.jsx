@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { HistContext } from "../../../../hooks/HistContext";
 import { ShowContext } from "../../../../hooks/showContext";
+import { ReturnContext } from "../../../../hooks/ReturnContext";
 import Sell from "./Sell";
 
 const Content = ({ coin }) => {
@@ -8,6 +9,7 @@ const Content = ({ coin }) => {
   const [profit, setProfit] = useState(0);
   const [value, setValue] = useState(0);
   const [showSellModal, setShowSellModal] = useState(false);
+
 
   const addTran = () => {
     setHist([
@@ -25,6 +27,7 @@ const Content = ({ coin }) => {
 
     const netprofit = coin.buyprice.reduce((acc, buy) => acc + (coin.price - buy), 0);
     setProfit(netprofit);
+    
 
     const val = coin.buyprice.reduce((acc, bp) => acc + bp, 0);
     setValue(val);
